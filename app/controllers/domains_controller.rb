@@ -1,4 +1,5 @@
 class DomainsController < ApplicationController
+  before_action :authenticate_user!
   before_action :set_domain, only: [:edit, :update, :destroy, :show]
 
   def add_domains
