@@ -1,0 +1,20 @@
+<p> Home Page </p>
+<!-- link adding for user login/logout -->
+<% if current_user.present? %>
+  <%= link_to "sign out", destroy_user_session_path, method: :delete %>
+<% else %>
+  <%= link_to "Log in", new_user_session_path %><br />
+<% end %>
+<br />
+<% if current_user.domains.count < 3 %>
+  <%= link_to "Add Domain", new_domain_path %>
+<% end %>
+
+<% current_user.domains.each do |domain| %>
+  <%= domain.url %>
+  <%= domain.domain_ranks.last.rank if domain.domain_ranks.last.present? %>
+  <%= link_to 'Edit', edit_domain_path(domain) %>
+  <%= link_to 'Destroy', domain, method: :delete, data: { confirm: 'Are you sure?' } %>
+  </br>
+<% end %>
+
