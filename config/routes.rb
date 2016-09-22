@@ -3,7 +3,7 @@ Rails.application.routes.draw do
   devise_for :users
   root 'home#index'
 
-  resources :domains, only: [:new, :create, :edit, :update, :destroy] do
+  resources :domains, only: [:new, :create, :edit, :update, :destroy, :show] do
     collection do
       get :add_domains
       post :save_domains

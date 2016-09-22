@@ -13,6 +13,7 @@
 <% current_user.domains.each do |domain| %>
   <%= domain.url %>
   <%= domain.domain_ranks.last.rank if domain.domain_ranks.last.present? %>
+  <%= link_to 'Show', domain %>
   <%= link_to 'Edit', edit_domain_path(domain) %>
   <%= link_to 'Destroy', domain, method: :delete, data: { confirm: 'Are you sure?' } %>
   </br>
