@@ -9,6 +9,10 @@ gem 'sqlite3'
 gem 'pg'
 # Using devise for User Authorization
 gem 'devise'
+# Using domainatrix for domain mapping
+gem 'domainatrix'
+# Using nokogiri for scraping website
+gem 'nokogiri'
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 5.0'
 # Use Uglifier as compressor for JavaScript assets
