@@ -13,6 +13,10 @@ gem 'devise'
 gem 'domainatrix'
 # Using nokogiri for scraping website
 gem 'nokogiri'
+# Using Whenever to Start Active Job
+gem 'whenever', :require => false
+# Using high charts for rank display
+gem 'lazy_high_charts'
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 5.0'
 # Use Uglifier as compressor for JavaScript assets

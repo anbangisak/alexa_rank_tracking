@@ -1,5 +1,5 @@
 class DomainsController < ApplicationController
-  before_action :set_domain, only: [:edit, :update, :destroy]
+  before_action :set_domain, only: [:edit, :update, :destroy, :show]
 
   def add_domains
   end
@@ -28,6 +28,10 @@ class DomainsController < ApplicationController
         format.html { render :new }
       end
     end
+  end
+
+  def show
+    gen_chart
   end
 
   def edit
@@ -77,4 +81,39 @@ class DomainsController < ApplicationController
   def domain_params
     params.require(:domain).permit(:url, :name, :description)
   end
+
+  def gen_chart
+    @chart = LazyHighCharts::HighChart.new('graph') do |f|
+      f.title(text: "#{@domain.url} day vs rank ")
+      f.xAxis(categories: @domain.domain_ranks.collect{|dr| dr.rank_time.strftime("%A")})
+      f.series(name: "Rank in Billions", yAxis: 0, data: @domain.domain_ranks.collect(&:rank))
+
+      f.yAxis [
+        {title: {text: "Rank in Billions", margin: 70} },
+      ]
+
+      f.legend(align: 'right', verticalAlign: 'top', y: 75, x: -50, layout: 'vertical')
+      f.chart({defaultSeriesType: "column"})
+    end
+
+    @chart_globals = LazyHighCharts::HighChartGlobals.new do |f|
+      f.global(useUTC: false)
+      f.chart(
+        backgroundColor: {
+          linearGradient: [0, 0, 500, 500],
+          stops: [
+            [0, "rgb(255, 255, 255)"],
+            [1, "rgb(240, 240, 255)"]
+          ]
+        },
+        borderWidth: 2,
+        plotBackgroundColor: "rgba(255, 255, 255, .9)",
+        plotShadow: true,
+        plotBorderWidth: 1
+      )
+      f.lang(thousandsSep: ",")
+      f.colors(["#90ed7d", "#f7a35c", "#8085e9", "#f15c80", "#e4d354"])
+    end
+  end
+
 end
