@@ -25,7 +25,7 @@ permit_params :cron_time, :domain_limit
       else
         GeneralConfig.create(config_params)
       end
-      redirect_to admin_general_configs_path,notice: 'Calendar Created Successfully'
+      redirect_to admin_general_configs_path,notice: 'Configurations Updated Successfully'
     end
 
     def index
